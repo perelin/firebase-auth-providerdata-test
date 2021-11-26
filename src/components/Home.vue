@@ -23,6 +23,11 @@ const uiConfig = {
       console.log("signInSuccessWithAuthResult:", authResult, redirectUrl);
       return true;
     },
+    signInFailure: function (error) {
+      console.log("signInFailure:", error);
+
+      return error;
+    },
     uiShown: function () {
       console.log("uiShown");
     },
