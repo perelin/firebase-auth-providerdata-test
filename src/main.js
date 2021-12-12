@@ -1,8 +1,8 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import App from "./App.vue";
 
@@ -25,8 +25,9 @@ const firebaseConfig = {
   appId: "1:337667455065:web:cb4cc36af9c7c8f7721948",
 };
 
-function registerOnAuthStateChanged() {
-  firebase.auth().onAuthStateChanged(
+function registerOnAuthStateChanged(fbAuth) {
+  onAuthStateChanged(
+    fbAuth,
     (user) => {
       if (user) {
         console.log("onAuthStateChanged: user found");
@@ -46,8 +47,8 @@ const app = createApp(App);
 app.use(router);
 app.mount("#app");
 
-const fbApp = firebase.initializeApp(firebaseConfig);
-const fbAuth = fbApp.auth();
-registerOnAuthStateChanged();
+const fbApp = initializeApp(firebaseConfig);
+const fbAuth = getAuth(fbApp);
+registerOnAuthStateChanged(fbAuth);
 app.config.globalProperties.$fbApp = fbApp;
 app.config.globalProperties.$fbAuth = fbAuth;
