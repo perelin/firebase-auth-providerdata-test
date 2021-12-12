@@ -33,28 +33,27 @@ const uiConfig = {
     },
   },
 };
+let fbUI = {};
 
 export default {
   name: "Home",
   data: function () {
-    return {
-      fbUI: {},
-    };
+    return {};
   },
   methods: {
     initFBUI: function () {
       const uiReference = firebaseui.auth.AuthUI.getInstance("demoUI");
       console.log("uiReference ", uiReference);
-      this.fbUI =
+      fbUI =
         uiReference !== null
           ? uiReference
           : new firebaseui.auth.AuthUI(this.$fbAuth, "demoUI");
-      console.log("this.fbUI", this.fbUI);
+      console.log("fbUI", fbUI);
     },
     startAuthUI: function () {
-      console.log("ui.isPendingRedirect()", this.fbUI.isPendingRedirect());
-      this.fbUI.start("#firebaseui-auth-container", uiConfig);
-      console.log("this.fbUI started");
+      console.log("ui.isPendingRedirect()", fbUI.isPendingRedirect());
+      fbUI.start("#firebaseui-auth-container", uiConfig);
+      console.log("fbUI started");
     },
   },
   mounted() {
