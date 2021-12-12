@@ -14,6 +14,7 @@ export default {
       signOut(this.$fbAuth)
         .then(() => {
           console.log("sign out successfull");
+          this.$router.push({ path: "/" });
         })
         .catch((error) => {
           console.log(error);
