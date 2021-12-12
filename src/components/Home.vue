@@ -20,16 +20,20 @@ const uiConfig = {
   signInFlow: "redirect",
   callbacks: {
     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-      console.log("signInSuccessWithAuthResult:", authResult, redirectUrl);
+      console.log(
+        "callbacks: signInSuccessWithAuthResult:",
+        authResult,
+        redirectUrl
+      );
       return true;
     },
     signInFailure: function (error) {
-      console.log("signInFailure:", error);
+      console.log("callbacks: signInFailure:", error);
 
       return error;
     },
     uiShown: function () {
-      console.log("uiShown");
+      console.log("callbacks: uiShown");
     },
   },
 };
@@ -43,17 +47,20 @@ export default {
   methods: {
     initFBUI: function () {
       const uiReference = firebaseui.auth.AuthUI.getInstance("demoUI");
-      console.log("uiReference ", uiReference);
+      //console.log("uiReference ", uiReference);
       fbUI =
         uiReference !== null
           ? uiReference
           : new firebaseui.auth.AuthUI(this.$fbAuth, "demoUI");
-      console.log("fbUI", fbUI);
+      //console.log("fbUI", fbUI);
     },
     startAuthUI: function () {
-      console.log("ui.isPendingRedirect()", fbUI.isPendingRedirect());
+      console.log(
+        "startAuthUI: ui.isPendingRedirect()",
+        fbUI.isPendingRedirect()
+      );
       fbUI.start("#firebaseui-auth-container", uiConfig);
-      console.log("fbUI started");
+      console.log("startAuthUI: fbUI started");
     },
   },
   mounted() {

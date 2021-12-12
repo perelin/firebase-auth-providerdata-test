@@ -31,8 +31,8 @@ function registerOnAuthStateChanged(fbAuth) {
     (user) => {
       if (user) {
         console.log("onAuthStateChanged: user found");
-        console.log(user.providerData);
-        console.log(user);
+        console.log("onAuthStateChanged: user.providerData", user.providerData);
+        console.log("onAuthStateChanged: user", user);
       } else {
         console.log("onAuthStateChanged: no user found");
       }
